@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hospital</title>
+    <style>
+        body, html{
+            margin: 0;
+            padding: 0;
+            /*background: url("img/fon.png");*/
+            background-size: cover;
+        }
+
+
+    </style>
+</head>
+<body>
+<header>
+    <span class="logo"></span>
+    <button id="header__button">CREATE</button>
+</header>
+<div id="form">
+    <button id="delete">X</button>
+    <select id="doctor" onfocus="this.selectedIndex = -1;">
+        <option value="cardiologist">cardiologist</option>
+        <option value="dentist">dentist</option>
+        <option value="therapist">therapist</option>
+    </select>
+    <div id="inputs">
+
+    </div>
+    <button id="submit">SUBMIT</button>
+
+</div>
+<div class="container">
+
+    <span class="no-items">No items have been added</span>
+</div>
+
+<script src="js/structure.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
