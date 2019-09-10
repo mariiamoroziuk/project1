@@ -59,6 +59,7 @@ selectDoctor.onchange=function (event) {
 };
 submit.onclick = function(){
     arreyOfData.push(createVisitData());
+    container.innerHTML='';
     arreyOfData.forEach(function (object) {
         if(object.doctor==='therapist'){
             let cart = new Therapist(object.visitor, object.doctor, object.target, object.date, object.comments, object.age);
@@ -68,8 +69,8 @@ submit.onclick = function(){
             let cart = new Dentist(object.visitor, object.doctor, object.target, object.date, object.comments, object.lastDate);
             cart.createCart();
         }
-        if(object.doctor==='therapist'){
-            let cart = new Therapist(object.visitor, object.doctor, object.target, object.date, object.comments, object. pressure, object.bodyMassIndex, object.disease);
+        if(object.doctor==='cardiologist'){
+            let cart = new Cardiologist(object.visitor, object.doctor, object.target, object.date, object.comments, object. pressure, object.bodyMassIndex, object.disease);
             cart.createCart();
         }
     })

@@ -7,16 +7,71 @@
         body, html{
             margin: 0;
             padding: 0;
-            /*background: url("img/fon.png");*/
+            background: url("img/fon.png");
             background-size: cover;
         }
+        header{
+            width: 800px;
+            height: 100px;
+            margin: 20px auto;
+            background-color:white;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            border-radius: 3px;
+            border: 1px white solid;
+        }
+        #form{
+            width: 180px;
+            height: 200px;
+            padding: 20px;
+            position: absolute;
+            top: 150px;
+            right: 100px;
+            border: 1px lightgrey solid;
+            border-radius: 3px;
+            display: none;
+            background-color:lightgray;
 
+        }
+        #header__button{
+            height: 50px;
+            width: 80px;
+            background-color: forestgreen;
+            border: 1px forestgreen solid;
+            border-radius: 3px;
+            margin: 25px;
+            color: white;
+        }
+        .container{
+            width: 800px;
+            height: 300px;
+            margin: 180px auto 0;
+            background-color: white;
+            text-align: center;
+            padding: 20px 30px;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            border: 1px white solid;
+            border-radius: 3px;
+
+        }
+
+        .container>div {
+            padding: 30px;
+            width: 100px;
+            background-color: grey;
+            margin: 20px;
+            border: 1px grey solid;
+            border-radius: 10px;
+        }
 
     </style>
 </head>
 <body>
 <header>
-    <span class="logo"></span>
+    <span class="logo"><img src="img/leaf-logo-design_104950-72.jpg" height="100" width="120"/></span>
     <button id="header__button">CREATE</button>
 </header>
 <div id="form">
