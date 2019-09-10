@@ -60,13 +60,17 @@ selectDoctor.onchange=function (event) {
 submit.onclick = function(){
     arreyOfData.push(createVisitData());
     arreyOfData.forEach(function (object) {
-        console.log(object.doctor);
         if(object.doctor==='therapist'){
-
-            let   cart = new Therapist(object.visitor, object.doctor, object.target, object.date, object.comments, object.age);
+            let cart = new Therapist(object.visitor, object.doctor, object.target, object.date, object.comments, object.age);
             cart.createCart();
-            console.log(cart);
-            console.log(arreyOfData);
+        }
+        if(object.doctor==='dentist'){
+            let cart = new Dentist(object.visitor, object.doctor, object.target, object.date, object.comments, object.lastDate);
+            cart.createCart();
+        }
+        if(object.doctor==='therapist'){
+            let cart = new Therapist(object.visitor, object.doctor, object.target, object.date, object.comments, object. pressure, object.bodyMassIndex, object.disease);
+            cart.createCart();
         }
     })
 };

@@ -46,9 +46,9 @@ class Visit {
 
 
 class Dentist extends Visit {
-    constructor(object) {
-        super();
-        this.lastDate = object.lastDate;
+    constructor(visitor, doctor, target, date, comments, lastDate) {
+        super(visitor, doctor, target, date, comments);
+        this.lastDate = lastDate|| '';
     }
     createCart() {
         super.createCart();
@@ -66,11 +66,11 @@ class Therapist extends Visit {
 }
 
 class Cardiologist extends Visit {
-    constructor(object) {
-        super();
-        this.pressure = object.pressure;
-        this.bodyMassIndex = object.bodyMassIndex;
-        this.disease = object.disease;
+    constructor(visitor, doctor, target, date, comments, pressure, bodyMassIndex, disease) {
+        super(visitor, doctor, target, date, comments);
+        this.pressure = pressure||'';
+        this.bodyMassIndex = bodyMassIndex||'';
+        this.disease = disease||'';
     }
     createCart() {
         super.createCart();
