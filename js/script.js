@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', onReady);
+
 const createFormButton=document.getElementById('header__button');
 const form=document.getElementById('form');
 const deleteButton=document.getElementById('delete');
@@ -8,12 +10,31 @@ const noItems = document.getElementsByClassName('no-items')[0];
 const submit = document.getElementById('submit');
 let arreyOfData=[];
 
+function onReady() {
+    document.addEventListener('click', function(event) {
+        if (!form.contains(event.target))
+            closeDoctorW();
+    });
+
+    createFormButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        noItems.innerHTML='';
+        form.style.display='block';
+    });
+}
+
+let closeDoctorW = function closeDoctor() {
+    form.style.display = "none";
+    console.log('selectedDoctor ');
+};
+
 const inputMaxLength = 100;
 const textareaMaxLength = 400;
 let doctor='';
 
 createFormButton.onclick= function(){
     form.style.display='block';
+
     noItems.innerHTML='';
 };
 
@@ -84,7 +105,8 @@ submit.onclick = function(){
             cart.createCart();
         }
         console.log(arreyOfData);
-    })
+    });
+    closeDoctorW();
 };
 
 function createVisitData() {
@@ -105,7 +127,7 @@ function createVisitData() {
     return obj
 }
 
-function removeObject(arr, docto, visitor, date, target) {
+function removeObject(arr, doctor, visitor, date, target) {
     return arr.filter(function (obj) {
         return obj.doctor!==doctor||obj.visitor!==visitor||obj.date!==date||obj.target!==target
     })
