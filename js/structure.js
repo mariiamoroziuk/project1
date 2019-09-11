@@ -9,6 +9,7 @@ class Visit {
 
     createCart(){
         let cart = document.createElement('div');
+        cart.className = "draggable";
         let close = document.createElement('button');
         close.data = this;
         close.innerText = 'x';
