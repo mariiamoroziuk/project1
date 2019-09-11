@@ -11,11 +11,10 @@ class Visit {
         let cart = document.createElement('div');
         let close = document.createElement('button');
         close.data = this;
-        console.log(close.data);
         close.innerText = 'x';
         close.onclick = function(event) {
             arreyOfData = removeObject(arreyOfData, this.data.doctor, this.data.visitor, this.data.date, this.data.target);
-            console.log(arreyOfData);
+            localStorage.setItem('arreyOfData', JSON.stringify(arreyOfData));
             let element = event.target;
             let parent = element.parentElement;
             container.removeChild(parent);

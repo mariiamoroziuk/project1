@@ -9,6 +9,12 @@ const container = document.getElementsByClassName('container')[0];
 const noItems = document.getElementsByClassName('no-items')[0];
 const submit = document.getElementById('submit');
 let arreyOfData=[];
+document.addEventListener('DOMContentLoaded', function () {
+    if(JSON.parse(localStorage.getItem('arreyOfData'))){
+        arreyOfData=JSON.parse(localStorage.getItem('arreyOfData'));
+        showAllCarts();
+    }
+});
 
 function onReady() {
     document.addEventListener('click', function(event) {
@@ -38,10 +44,10 @@ createFormButton.onclick= function(){
     noItems.innerHTML='';
 };
 
-closeForm = function () {
+function closeForm() {
     inputs.innerHTML='';
     form.style.display='none';
-};
+}
 
 deleteButton.onclick=function(){
     closeForm()
@@ -88,9 +94,8 @@ selectDoctor.onchange=function (event) {
     createTeg(inputs,"textarea", "comments"," ", textareaMaxLength);
 
 };
-submit.onclick = function(){
-    arreyOfData.push(createVisitData());
-    container.innerHTML='';
+
+function showAllCarts() {
     arreyOfData.forEach(function (object) {
         if(object.doctor==='therapist'){
             let cart = new Therapist(object.visitor, object.doctor, object.target, object.date, object.comments, object.age);
@@ -104,9 +109,21 @@ submit.onclick = function(){
             let cart = new Cardiologist(object.visitor, object.doctor, object.target, object.date, object.comments, object. pressure, object.bodyMassIndex, object.disease);
             cart.createCart();
         }
+
         console.log(arreyOfData);
     });
     closeDoctorW();
+
+    });
+}
+
+submit.onclick = function(){
+    arreyOfData.push(createVisitData());
+    localStorage.setItem('arreyOfData', JSON.stringify(arreyOfData));
+    container.innerHTML='';
+    showAllCarts();
+    closeForm();
+
 };
 
 function createVisitData() {
@@ -129,6 +146,7 @@ function createVisitData() {
 
 function removeObject(arr, doctor, visitor, date, target) {
     return arr.filter(function (obj) {
+
         return obj.doctor!==doctor||obj.visitor!==visitor||obj.date!==date||obj.target!==target
     })
 }
