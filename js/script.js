@@ -113,8 +113,6 @@ function showAllCarts() {
         console.log(arreyOfData);
     });
     closeDoctorW();
-
-    });
 }
 
 submit.onclick = function(){
