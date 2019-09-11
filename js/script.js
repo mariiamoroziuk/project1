@@ -1,5 +1,6 @@
 const createFormButton=document.getElementById('header__button');
 const form=document.getElementById('form');
+const deleteButton=document.getElementById('delete');
 const inputs=document.getElementById('inputs');
 const selectDoctor=document.getElementById('doctor');
 const container = document.getElementsByClassName('container')[0];
@@ -14,6 +15,15 @@ let doctor='';
 createFormButton.onclick= function(){
     form.style.display='block';
     noItems.innerHTML='';
+};
+
+closeForm = function () {
+    inputs.innerHTML='';
+    form.style.display='none';
+};
+
+deleteButton.onclick=function(){
+    closeForm()
 };
 
 function createTeg(parent, teg, name, type, maxlength, text){
@@ -73,6 +83,7 @@ submit.onclick = function(){
             let cart = new Cardiologist(object.visitor, object.doctor, object.target, object.date, object.comments, object. pressure, object.bodyMassIndex, object.disease);
             cart.createCart();
         }
+        console.log(arreyOfData);
     })
 };
 
@@ -94,8 +105,8 @@ function createVisitData() {
     return obj
 }
 
-function removeObject(arr, doctor) {
+function removeObject(arr, docto, visitor, date, target) {
     return arr.filter(function (obj) {
-        return obj.doctor!==doctor
+        return obj.doctor!==doctor||obj.visitor!==visitor||obj.date!==date||obj.target!==target
     })
 }
