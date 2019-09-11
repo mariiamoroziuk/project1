@@ -11,6 +11,7 @@ class Visit {
         let cart = document.createElement('div');
         cart.className = "draggable";
         let close = document.createElement('button');
+        close.className = "delCart";
         close.data = this;
         close.innerText = 'x';
         close.onclick = function(event) {
