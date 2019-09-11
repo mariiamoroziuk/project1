@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', function () {
         arreyOfData=JSON.parse(localStorage.getItem('arreyOfData'));
         if (arreyOfData.length > 0) {
             noItems.innerHTML='';
-
+            showAllCarts();
         }
-        showAllCarts();
+
     }
 });
 
@@ -33,8 +33,9 @@ function onReady() {
     });
 
     let isDragging = false;
-
     document.addEventListener('mousedown', function(event) {
+
+        if (event.target.closest('.delCart') )  return; // check if was clicked "delete card"
 
         let dragElement = event.target.closest('.draggable');
 
@@ -52,7 +53,7 @@ function onReady() {
 
         function onMouseUp(event) {
             finishDrag();
-        };
+        }
 
         function onMouseMove(event) {
             moveAt(event.clientX, event.clientY);
@@ -77,7 +78,7 @@ function onReady() {
             element.style.position = 'fixed';
 
             moveAt(clientX, clientY);
-        };
+        }
 
         // switch to absolute coordinates at the end, to fix the element in the document
         function finishDrag() {
@@ -110,7 +111,7 @@ function onReady() {
                 // scroll the document down by 10px has a problem
                 // it can scroll beyond the end of the document
                 // Math.min(how much left to the end, 10)
-                let scrollY = Math.min(docBottom - newBottom, 10);
+                let scrollY = Math.min(docBottom - newBottom, 1);
 
                 // calculations are imprecise, there may be rounding errors that lead to scrolling up
                 // that should be impossible, fix that here
@@ -127,7 +128,7 @@ function onReady() {
             // check if the new coordinates are above the top window edge (similar logic)
             if (newY < 0) {
                 // scroll up
-                let scrollY = Math.min(-newY, 10);
+                let scrollY = Math.min(-newY, 1);
                 if (scrollY < 0) scrollY = 0; // check precision errors
 
                 window.scrollBy(0, -scrollY);
