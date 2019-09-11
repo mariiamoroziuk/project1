@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
             noItems.innerHTML='';
             showAllCarts();
         }
-
     }
 });
 
