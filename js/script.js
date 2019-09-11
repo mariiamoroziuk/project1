@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', onReady);
+
 const createFormButton=document.getElementById('header__button');
 const form=document.getElementById('form');
 const deleteButton=document.getElementById('delete');
@@ -14,12 +16,31 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+function onReady() {
+    document.addEventListener('click', function(event) {
+        if (!form.contains(event.target))
+            closeDoctorW();
+    });
+
+    createFormButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        noItems.innerHTML='';
+        form.style.display='block';
+    });
+}
+
+let closeDoctorW = function closeDoctor() {
+    form.style.display = "none";
+    console.log('selectedDoctor ');
+};
+
 const inputMaxLength = 100;
 const textareaMaxLength = 400;
 let doctor='';
 
 createFormButton.onclick= function(){
     form.style.display='block';
+
     noItems.innerHTML='';
 };
 
@@ -88,6 +109,11 @@ function showAllCarts() {
             let cart = new Cardiologist(object.visitor, object.doctor, object.target, object.date, object.comments, object. pressure, object.bodyMassIndex, object.disease);
             cart.createCart();
         }
+
+        console.log(arreyOfData);
+    });
+    closeDoctorW();
+
     });
 }
 
@@ -97,6 +123,7 @@ submit.onclick = function(){
     container.innerHTML='';
     showAllCarts();
     closeForm();
+
 };
 
 function createVisitData() {

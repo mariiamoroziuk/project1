@@ -1,10 +1,10 @@
 class Visit {
     constructor(visitor, doctor, target, date, comments) {
-        this.visitor = visitor;
-        this.doctor = doctor;
-        this.target = target|| '';
-        this.date = date|| '';
-        this.comments = comments|| '';
+        this.visitor  = visitor;
+        this.doctor   = doctor;
+        this.target   = target || '';
+        this.date     = date || '';
+        this.comments = comments || '';
     }
 
     createCart(){
@@ -18,7 +18,6 @@ class Visit {
             let element = event.target;
             let parent = element.parentElement;
             container.removeChild(parent);
-
         };
         cart.appendChild(close);
         createTeg(cart,"div", "visitor", '','', this.visitor );
@@ -36,8 +35,8 @@ class Visit {
 
         let hidden = document.createElement('div');
         hidden.style.display="none";
-        createTeg(hidden,"div", "target", '','', this.target );
-        createTeg(hidden,"div", "date", '','', this.date );
+        createTeg(hidden,"div", "target",   '','', this.target );
+        createTeg(hidden,"div", "date",     '','', this.date );
         createTeg(hidden,"div", "comments", '','', this.comments );
         cart.appendChild(hidden);
 
