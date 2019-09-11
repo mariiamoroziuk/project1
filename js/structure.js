@@ -19,7 +19,6 @@ class Visit {
             let element = event.target;
             let parent = element.parentElement;
             container.removeChild(parent);
-
         };
         cart.appendChild(close);
         createTeg(cart,"div", "visitor", '','', this.visitor );
