@@ -69,8 +69,9 @@
             width: 140px;
             height: 150px;
             background-color: grey;
-            margin: 10px;
-            border: 1px grey solid;
+            /*margin: 10px;*/
+
+            border: 2px #c0dbf5 solid;
             border-radius: 10px;
         }
 
@@ -83,7 +84,8 @@
 </header>
 <div id="form" >
     <button id="delete">X</button>
-    <select id="doctor" onfocus="this.selectedIndex = -1;">
+    <select id="doctor">
+        <option value="Select">Select a doctor</option>
         <option value="cardiologist">cardiologist</option>
         <option value="dentist">dentist</option>
         <option value="therapist">therapist</option>
