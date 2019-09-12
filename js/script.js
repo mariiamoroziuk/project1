@@ -9,7 +9,8 @@ const container = document.getElementsByClassName('container')[0];
 const noItems = document.getElementsByClassName('no-items')[0];
 const submit = document.getElementById('submit');
 let arreyOfData=[];
-document.addEventListener('DOMContentLoaded', function () {
+
+function onReady() {
     if(JSON.parse(localStorage.getItem('arreyOfData'))){
         arreyOfData=JSON.parse(localStorage.getItem('arreyOfData'));
         if (arreyOfData.length > 0) {
@@ -17,9 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
             showAllCarts();
         }
     }
-});
 
-function onReady() {
     document.addEventListener('click', function(event) {
         if (!form.contains(event.target))
             closeDoctorW();
@@ -46,7 +45,7 @@ function onReady() {
             return false;
         };
 
-        let coords, shiftX, shiftY;
+        let shiftX, shiftY;
 
         startDrag(dragElement, event.clientX, event.clientY);
 
@@ -58,9 +57,6 @@ function onReady() {
             moveAt(event.clientX, event.clientY);
         }
 
-        // on drag start:
-        //   remember the initial shift
-        //   move the element position:fixed and a direct child of body
         function startDrag(element, clientX, clientY) {
             if(isDragging) {
                 return;
@@ -129,7 +125,6 @@ let doctor='';
 
 createFormButton.onclick= function(){
     form.style.display='block';
-
     noItems.innerHTML='';
 };
 
@@ -198,13 +193,12 @@ function showAllCarts() {
             let cart = new Cardiologist(object.visitor, object.doctor, object.target, object.date, object.comments, object. pressure, object.bodyMassIndex, object.disease);
             cart.createCart();
         }
-
-        console.log(arreyOfData);
     });
     closeDoctorW();
 }
 
 submit.onclick = function(){
+    selectDoctor.options[0].setAttribute("selected", "selected");
     arreyOfData.push(createVisitData());
     localStorage.setItem('arreyOfData', JSON.stringify(arreyOfData));
     container.innerHTML='';
