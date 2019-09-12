@@ -2,9 +2,9 @@ class Visit {
     constructor(visitor, doctor, target, date, comments) {
         this.visitor  = visitor;
         this.doctor   = doctor;
-        this.target   = target || '';
-        this.date     = date || '';
-        this.comments = comments || '';
+        this.target   = target;
+        this.date     = date;
+        this.comments = comments;
     }
 
     createCart(){
@@ -36,6 +36,7 @@ class Visit {
         cart.appendChild(show);
 
         let hidden = document.createElement('div');
+        hidden.id='hidden';
         hidden.style.display="none";
         createTeg(hidden,"div", "target",   '','', this.target );
         createTeg(hidden,"div", "date",     '','', this.date );
@@ -50,31 +51,43 @@ class Visit {
 class Dentist extends Visit {
     constructor(visitor, doctor, target, date, comments, lastDate) {
         super(visitor, doctor, target, date, comments);
-        this.lastDate = lastDate|| '';
+        this.lastDate = lastDate;
     }
     createCart() {
         super.createCart();
+        let hidden = document.getElementById('hidden');
+        createTeg(hidden,"div", "lastDate",     '','', this.lastDate );
+        hidden.id='';
     }
 }
 
 class Therapist extends Visit {
     constructor(visitor, doctor, target, date, comments, age) {
         super(visitor, doctor, target, date, comments);
-        this.age = age || '';
+        this.age = age;
     }
     createCart() {
         super.createCart();
+        let hidden = document.getElementById('hidden');
+        createTeg(hidden,"div", "age",'','', this.age);
+        hidden.id='';
     }
 }
 
 class Cardiologist extends Visit {
     constructor(visitor, doctor, target, date, comments, pressure, bodyMassIndex, disease) {
         super(visitor, doctor, target, date, comments);
-        this.pressure = pressure||'';
-        this.bodyMassIndex = bodyMassIndex||'';
-        this.disease = disease||'';
+        this.pressure = pressure;
+        this.bodyMassIndex = bodyMassIndex;
+        this.disease = disease;
     }
+
     createCart() {
         super.createCart();
+        let hidden = document.getElementById('hidden');
+        createTeg(hidden,"div", "pressure",'','', this.pressure);
+        createTeg(hidden,"div", "bodyMassIndex",'','', this.bodyMassIndex);
+        createTeg(hidden,"div", "disease",'','', this.disease);
+        hidden.id='';
     }
 }

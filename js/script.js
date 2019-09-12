@@ -8,27 +8,81 @@ const selectDoctor=document.getElementById('doctor');
 const container = document.getElementsByClassName('container')[0];
 const noItems = document.getElementsByClassName('no-items')[0];
 const submit = document.getElementById('submit');
+const inputMaxLength = 100;
+const textareaMaxLength = 400;
+let doctor='';
 let arreyOfData=[];
-document.addEventListener('DOMContentLoaded', function () {
+
+function onReady() {
     if(JSON.parse(localStorage.getItem('arreyOfData'))){
         arreyOfData=JSON.parse(localStorage.getItem('arreyOfData'));
         if (arreyOfData.length > 0) {
-            noItems.innerHTML='';
+            container.removeChild(noItems);
             showAllCarts();
         }
     }
-});
+    let closeDoctorW = function() {
+        inputs.innerHTML='';
+        form.style.display='none';
+        if(arreyOfData.length===0){
+            container.appendChild(noItems);
+        }
+    };
 
-function onReady() {
-    document.addEventListener('click', function(event) {
-        if (!form.contains(event.target))
+    createFormButton.onclick= function(){
+        form.style.display='block';
+    };
+
+    deleteButton.onclick=function(){
+        closeDoctorW()
+    };
+
+    selectDoctor.onchange=function (event) {
+        cleanInputs();
+
+        doctor =event.target.value;
+        createTeg(inputs,"input", "visitor", "text", );
+        createTeg(inputs, "input", "date", "text", );
+        createTeg(inputs, "input", "target", "text", );
+
+        if (doctor==='dentist') {
+            createTeg(inputs,"input", "lastDate", "text", );
+        }
+        if (doctor==='therapist') {
+            createTeg(inputs,"input", "age", "text", );
+        }
+        if (doctor==='cardiologist') {
+            createTeg(inputs,"input", "pressure", "text", );
+            createTeg(inputs,"input", "bodyMassIndex", "text", );
+            createTeg(inputs,"input", "disease", "text", );
+        }
+        createTeg(inputs,"textarea", "comments"," ", textareaMaxLength);
+    };
+
+    submit.onclick = function(){
+        let formInputs=inputs.querySelectorAll('input');
+        formInputs.every = [].every;
+        if (formInputs.every(function (element) {
+            return element.value
+        })) {
+            arreyOfData.push(createVisitData());
+            localStorage.setItem('arreyOfData', JSON.stringify(arreyOfData));
+            container.innerHTML = '';
+            showAllCarts();
             closeDoctorW();
+        }
+        else{ alert ('you should fill in all the fields')}
+    };
+
+    document.addEventListener('click', function(event) {
+        if (!form.contains(event.target)) {
+            closeDoctorW();
+        }
     });
 
     createFormButton.addEventListener('click', (e) => {
         e.stopPropagation();
-        noItems.innerHTML='';
-        form.style.display='block';
+        if(container.querySelector('h2')){ container.removeChild(noItems)}
     });
 
     let isDragging = false;
@@ -150,30 +204,6 @@ function onReady() {
     });
 }
 
-let closeDoctorW = function closeDoctor() {
-    form.style.display = "none";
-    console.log('selectedDoctor ');
-};
-
-const inputMaxLength = 100;
-const textareaMaxLength = 400;
-let doctor='';
-
-createFormButton.onclick= function(){
-    form.style.display='block';
-
-    noItems.innerHTML='';
-};
-
-function closeForm() {
-    inputs.innerHTML='';
-    form.style.display='none';
-}
-
-deleteButton.onclick=function(){
-    closeForm()
-};
-
 function createTeg(parent, teg, name, type, maxlength, text){
     let someTeg = document.createElement(teg);
     someTeg.type = type;
@@ -192,30 +222,6 @@ function getValue(elementName){
     return (document.getElementsByName(elementName)[0]).value;
 }
 
-selectDoctor.onchange=function (event) {
-    cleanInputs();
-
-    doctor =event.target.value;
-    createTeg(inputs,"input", "visitor", "text", );
-    createTeg(inputs, "input", "date", "text", );
-    createTeg(inputs, "input", "target", "text", );
-
-    if (doctor==='dentist') {
-        createTeg(inputs,"input", "lastDate", "text", );
-    }
-    if (doctor==='therapist') {
-        createTeg(inputs,"input", "age", "text", );
-    }
-    if (doctor==='cardiologist') {
-        createTeg(inputs,"input", "pressure", "text", );
-        createTeg(inputs,"input", "bodyMassIndex", "text", );
-        createTeg(inputs,"input", "disease", "text", );
-    }
-
-    createTeg(inputs,"textarea", "comments"," ", textareaMaxLength);
-
-};
-
 function showAllCarts() {
     arreyOfData.forEach(function (object) {
         if(object.doctor==='therapist'){
@@ -230,20 +236,8 @@ function showAllCarts() {
             let cart = new Cardiologist(object.visitor, object.doctor, object.target, object.date, object.comments, object. pressure, object.bodyMassIndex, object.disease);
             cart.createCart();
         }
-
-        console.log(arreyOfData);
     });
-    closeDoctorW();
 }
-
-submit.onclick = function(){
-    arreyOfData.push(createVisitData());
-    localStorage.setItem('arreyOfData', JSON.stringify(arreyOfData));
-    container.innerHTML='';
-    showAllCarts();
-    closeForm();
-
-};
 
 function createVisitData() {
     let obj={};
@@ -269,6 +263,5 @@ function removeObject(arr, doctor, visitor, date, target) {
         return obj.doctor!==doctor||obj.visitor!==visitor||obj.date!==date||obj.target!==target
     })
 }
-
 
 

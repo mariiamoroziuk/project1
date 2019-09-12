@@ -19,10 +19,9 @@
             justify-content: space-between;
             border-radius: 3px;
             border: 1px white solid;
-            background-color: #c0dbf5;
+            background-color: white;
         }
         #form{
-            z-index: 20000;
             width: 180px;
             height: 200px;
             padding: 20px;
@@ -51,37 +50,38 @@
             height: auto;
             min-height: 300px;
             margin: 150px auto 0;
-            background-color: white;
-            text-align: center;
-            padding: 20px 10px;
-            font-size: 30px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+            padding: 20px 20px;
             border: 1px white solid;
             border-radius: 3px;
-            background-color: #c0dbf5;
+            background-color: white;
         }
 
-        .container .draggable {
+        .container>div {
+            text-align: center;
             font-size: 20px;
+            line-height: 18px;
             padding: 5px auto;
             width: 140px;
-            height: 150px;
+            min-height: 150px;
+            height: auto;
             background-color: grey;
-            margin: 10px;
-            border: 1px grey solid;
+            border: 1px darkgray solid;
             border-radius: 10px;
+            display: inline-block;
+        }
+        .no-items{
+            text-align: center;
+            font-size: 30px;
         }
 
     </style>
 </head>
 <body>
 <header>
-    <span class="logo"><img src="img/leaf-logo-design_104950-72.jpg" height="100" width="120"/></span>
+    <span class="logo"><img src="img/leaf-logo-design_104950-72.jpg" height="100" width="120" alt=""/></span>
     <button id="header__button">CREATE</button>
 </header>
-<div id="form" >
+<div id="form">
     <button id="delete">X</button>
     <select id="doctor" onfocus="this.selectedIndex = -1;">
         <option value="cardiologist">cardiologist</option>
@@ -96,8 +96,7 @@
 </div>
 <div class="container">
 
-    <span class="no-items">No items have been added</span>
-
+    <h2 class="no-items">No items have been added</h2>
 </div>
 
 <script src="js/structure.js"></script>
